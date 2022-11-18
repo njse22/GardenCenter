@@ -1,9 +1,13 @@
 package model;
 
+import java.util.Random;
+
 public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String code;
+    private int[][] matrixCode;
 
     /**
      * @param name
@@ -12,7 +16,34 @@ public abstract class Plant {
     public Plant(String name, double cost) {
         this.name = name;
         this.cost = cost;
+        matrixCode = new int[4][4];
+        this.code = generateCode();
     }
+
+     public int[][] fillMatrix(){
+        Random aleatorio = new Random();
+        for(int i = 0; i <= 3; i++){
+            for(int j = 0; j <= 3; j++){
+                this.matrixCode[i][j] = (aleatorio.nextInt(10-0)+0);
+            }
+        }
+        return matrixCode;
+    }
+
+    public String generateCode(){
+        String autoCode = "";
+        int[][] matrixFilled = fillMatrix();
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j< 3; j++){
+                if(j%2 == 0){
+                    autoCode += "" + matrixFilled[i][j];
+                }
+            }
+        }
+        return autoCode;
+    }
+
+
     /**
      * @return the name
      */
@@ -46,7 +77,9 @@ public abstract class Plant {
         return "Plant [" + (name != null ? "name=" + name + ", " : "") + "cost=" + cost + "]";
     } 
 
-    
-    
+     public String getCode(){
+        return this.code;
+    }
+
 
 }
