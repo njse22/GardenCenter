@@ -1,6 +1,8 @@
 package ui;
 
 import model.GardenCenter;
+
+import java.security.Principal;
 import java.util.Scanner;
 
 public class Main {
@@ -33,17 +35,51 @@ public class Main {
         int option = 0;
         
        System.out.println("<<<<<Garden Center>>>>> \n" +
-				"1. agregar planta\n"+
-				"2. listar ortalizas con mas de un metro de altura. \n"+
-                "3. vender producto \n"+
+				"1. Agregar planta\n"+
+				"2. Listar ortalizas con mas de un metro de altura. \n"+
+                "3. Vender producto \n"+
 				"0. Exit. "); 
         option = validateIntegerInput();
         return option;
     }
 
     public void executeOption(int option){
+        String name, nameFruto = "";
+        double cost, height = 0.0;
+        int type = 0;
         switch(option){
             case 1:
+            System.out.println("Estas agregando una planta al vivero pero primero se pediran unos datos");
+            System.out.println("Cual es el nombre de la planta");
+            name = reader.next();
+            System.out.println("Escribe el costo de la planta");
+            cost = reader.nextDouble();
+            System.out.println("Digita el tipo de planta a ingresar \n" +
+            "1.Planta Frutal \n"+
+            "2.Planta Ornamental");
+
+            type = validateIntegerInput();
+            
+            switch(type){
+                case 1:
+                System.out.println("Escribe el nombre del fruto de esta planta");
+                nameFruto = reader.next();
+            
+
+                System.out.println(garden.createPlant(nameFruto, name, cost, height, type));
+                break;
+                
+                case 2:
+                System.out.println("Escribe la altura de la planta");
+                height = reader.nextDouble();
+
+                System.out.println(garden.createPlant(nameFruto, name, cost, height, type));
+                break;
+            
+            }
+
+            
+
 
             break;
 
@@ -54,7 +90,7 @@ public class Main {
             break;
 
             default:
-            System.out.println("Invalip Option.");
+            System.out.println("Invalid Option.");
             break;
         }
     }
