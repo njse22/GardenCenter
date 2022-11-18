@@ -82,9 +82,7 @@ public class GardenCenter{
 
     public String listPlants(){
         String msj = "";
-        for(int i = 0; i < plantsList.size(); i++){
-            msj += plantsList.toString() + "\n";
-        }
+        msj += plantsList.toString() + "\n";
         return msj;
     }
 
