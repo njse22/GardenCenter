@@ -93,7 +93,9 @@ public class Main {
                 }
             break;
 
-            case 2: 
+            case 2:
+                msj = garden.listHighOrnamentals();
+                System.out.println(msj);
             break;
 
             case 3: 

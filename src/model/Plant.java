@@ -4,7 +4,7 @@ import java.util.Random;
 
 public abstract class Plant {
     
-    private String name; 
+    protected String name; 
     private double cost;
     private String code;
     private int[][] matrixCode;
@@ -33,8 +33,8 @@ public abstract class Plant {
     public String generateCode(){
         String autoCode = "";
         int[][] matrixFilled = fillMatrix();
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j< 3; j++){
+        for(int i = 0; i <= 3; i++){
+            for(int j = 0; j<= 3; j++){
                 if(j%2 == 0){
                     autoCode += "" + matrixFilled[i][j];
                 }
@@ -74,7 +74,7 @@ public abstract class Plant {
     
     @Override
     public String toString() {
-        return "Plant [" + (name != null ? "name=" + name + ", " : "") + "cost=" + cost + "]";
+        return "Plant [" + "name=" + name + ", " + "cost=" + cost + "]";
     } 
 
      public String getCode(){

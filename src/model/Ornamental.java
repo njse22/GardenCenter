@@ -9,4 +9,12 @@ public class Ornamental extends Plant{
 		this.size = size;
 	}
 
+	public int getSize(){
+		return this.size;
+	}
+
+	public String getName(){
+		return super.name;
+	}
+
 }

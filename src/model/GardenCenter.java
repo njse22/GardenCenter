@@ -38,7 +38,7 @@ public class GardenCenter{
         if(validateNameExists(plantName) == -1){
             plantsList.add(newFrutalPlant);
             msj = "The plant was added succesfully \n" +
-                  "Code: ";
+                  "Code: " + newFrutalPlant.getCode();
         }else{
             msj = "There's already another Plant with this name";
         }
@@ -50,7 +50,8 @@ public class GardenCenter{
         Ornamental newOrnamentalPlant = new Ornamental(plantName, plantCost, size);
          if(validateNameExists(plantName) == -1){
             plantsList.add(newOrnamentalPlant);
-            msj = "The plant was added succesfully";
+            msj = "The plant was added succesfully \n" +
+                  "Code: " + newOrnamentalPlant.getCode();
         }else{
             msj = "There's already another Plant with this name";
         }
@@ -67,6 +68,20 @@ public class GardenCenter{
             }
         }
         return pos;
+    }
+
+    public String listHighOrnamentals(){
+        String msj = "";
+        for(int i = 0; i < plantsList.size(); i++){
+                if(plantsList.get(i) != null){
+                    if(plantsList.get(i) instanceof Ornamental){
+                        if(((Ornamental)(plantsList.get(i))).getSize() >1){
+                            msj += ((Ornamental)(plantsList.get(i))).toString() + "Size: " + ((Ornamental)(plantsList.get(i))).getSize() + " mts";
+                        }
+                    }
+                }
+        }
+    return msj;
     }
 
 //------------------------------------ Getters and setters-----------------------------------------
