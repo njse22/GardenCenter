@@ -117,7 +117,7 @@ public class Main {
     public String uiSellPlant() {
         String msg = "";
 
-        System.out.println("Estas son las matrices disponibles: ");
+        System.out.println("Estas son las plantas disponibles: ");
         System.out.println(garden.showAllPlants());
 
         return msg;

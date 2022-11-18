@@ -27,20 +27,17 @@ public class GardenCenter{
     public String addPlant(boolean isOrnamental, String name, double cost, double height, String fruitName) {
         String msg = "No se ha podido agregar la planta";
         boolean isEmpty = true;
-        Plant newPlant;
+        Plant newPlant = new FrutalPlant(name, cost, fruitName);
+        Plant newOrnamental = new OrnamentalPlant(name, cost, height);
 
         if (searchPlantByName(name) != -1) {
             msg = "El nombre de esta planta ya ha sido registrado";
             return msg;
         }
 
-        if (isOrnamental) {
-            newPlant = new OrnamentalPlant(name, cost, height);
-        } else {
-            newPlant = new FrutalPlant(name, height, fruitName);
-        }
-
-        newPlant.setCode(generatePlantCode());
+        //String code = generatePlantCode();
+        //newPlant.setCode(code);
+        //newOrnamental.setCode(code);
 
         for (int i = 0; i < plants.length && isEmpty == true; i++) {
             for (int j = 0; j < plants[0].length && isEmpty == true; j++) {
@@ -48,15 +45,17 @@ public class GardenCenter{
                     plants[i][j] = newPlant;
                     msg = "Planta Ornamental agregada exitosamente";
                     isEmpty = false;
+                    plantsList.add(newOrnamental);
                 } else {
                     plants[i][j] = newPlant;
                     msg = "Planta Frutal agregada exitosamente";
                     isEmpty = false;
+                    plantsList.add(newPlant);
                 }
             }
         }
 
-        plantsList.add(newPlant);
+        
 
         return msg;
     }
@@ -108,7 +107,7 @@ public class GardenCenter{
         String msg = "";
 
         for (int i = 0; i < plantsList.size(); i++) {
-            if (plantsList.get(i) instanceof OrnamentalPlant) {
+            if (plantsList.get(i) instanceof OrnamentalPlant && ((OrnamentalPlant)(plantsList.get(i))).getHeight() > 1) {
                 msg += "* Nombre:" + plantsList.get(i).getName() + " Codigo: " + plantsList.get(i).getCode() + " Altura: " + ((OrnamentalPlant)(plantsList.get(i))).getHeight() + "\n";
             }
         }
@@ -119,7 +118,7 @@ public class GardenCenter{
     public String sellPlant() {
         String msg = "No se ha podido vender la planta";
 
-        
+
 
         return msg;
     }
