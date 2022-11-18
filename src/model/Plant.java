@@ -4,15 +4,31 @@ public abstract class Plant {
     
     private String name; 
     private double cost;
+    private int type;
 
     /**
      * @param name
      * @param cost
      */
-    public Plant(String name, double cost) {
+    public Plant(int type, String name, double cost) {
+        this.type = type;
         this.name = name;
         this.cost = cost;
     }
+
+    /**
+     * @return the type
+     */
+    public int getType() {
+        return type;
+    }
+    /**
+     * @param type the type to set
+     */
+    public void setType(int type) {
+        this.type = type;
+    }
+
     /**
      * @return the name
      */
