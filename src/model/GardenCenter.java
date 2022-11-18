@@ -1,14 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GardenCenter{
 
     private String name; 
     private String direcction;
 
-    private Plant[][] plants;
-    private ArrayList<Plant> plantsList; 
+    private Plant [][] plantss;
+    private ArrayList<Plant> plants; 
+    public static final int ROWS = 12;
+    public static final int COLUMNS = 6;
 
 
     /**
@@ -19,8 +22,31 @@ public class GardenCenter{
         this.name = name;
         this.direcction = direcction;
 
+        plants = new ArrayList<Plant>(10);
+
     }
 
+    public int[][] createMatrix(){
+        
+        int matrix[][] = new int[4][4];
+        for(int i = 0; i < ROWS; i++){
+            for(int j = 0; i < COLUMNS; i++){
+                matrix[i][j] = generateNumber();
+            }
+        }
+
+        return matrix;
+    }
+
+    public int generateNumber(){
+        int number = 0;
+        Random random = new Random();
+        number = (int)(random.nextInt()*9) + 0;
+
+        return number;
+    }
+
+    
     /**
      * @return the name
      */
@@ -52,16 +78,33 @@ public class GardenCenter{
     /**
      * @return the plants
      */
-    public Plant[][] getPlants() {
+    public ArrayList<Plant> getPlants() {
         return plants;
     }
 
-    /**
-     * @param plants the plants to set
-     */
-    public void setPlants(Plant[][] plants) {
-        this.plants = plants;
-    } 
+    public Plant[][] getPlantss() {
+        return plantss;
+    }
+
+
+    
+
+    public String addPlant(String plantName, double cost, double plantHeight, String fruitName, TypeOfPlant typeOfPlant){
+        String msj = "";
+
+        switch(typeOfPlant){
+            case ORNAMENT:
+            plants.add(new OrnamentPlant(plantHeight, plantName, cost));
+            msj = "Ornament plant added successfully";
+            break;
+            case FRUITY:
+            plants.add(new FruityPlant(fruitName, plantName, cost));
+            msj = "Fruity plant added successfully";
+            break;
+        }
+
+        return msj;
+    }
 
     
 
