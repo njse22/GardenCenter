@@ -4,14 +4,16 @@ public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String id; 
 
     /**
      * @param name
      * @param cost
      */
-    public Plant(String name, double cost) {
+    public Plant(String name, double cost, String id) {
         this.name = name;
         this.cost = cost;
+        this.id = id; 
     }
     /**
      * @return the name
@@ -36,6 +38,9 @@ public abstract class Plant {
      */
     public void setCost(double cost) {
         this.cost = cost;
+    }
+    public String  getId() {
+        return id;
     }
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
