@@ -19,7 +19,7 @@ public class GardenCenter{
         this.name = name;
         this.direction = direction;
         plantsList=new ArrayList <Plant>(10);
-        plants=new Plant[4][4];
+        plants=new Plant[12][6];
         ids=new int[5][5];
     }
 
@@ -92,17 +92,33 @@ public class GardenCenter{
         }
     public String addPlant(int typePlant, String namePlant, double costPlant, String nameFruit, double heigth){
         String msj="";
+        boolean isAdded=false;
+        String id=showIdPlant();
         if(typePlant==1){
-            String id=showIdPlant();
-            Frutal newFrutal= new Frutal(namePlant,costPlant,nameFruit,id);
-            plantsList.add(newFrutal);
-            msj="New Fruit added, id "+id;
-        }
-      else{
-            String id=showIdPlant();
-            Ornamental newOrnamental=new Ornamental(namePlant,costPlant, heigth,id);
-            plantsList.add(newOrnamental);
-            msj="new Ornamental added, id "+id;
+            for (int i=0;i<plants.length&&!isAdded;i++ ) {
+                for (int j=0;j<plants[0].length&&!isAdded; j++) {
+                        if((i+j)%2==0){
+                            Frutal newFrutal= new Frutal(namePlant,costPlant,nameFruit,id);
+                            plants[i][j]=newFrutal;
+                            isAdded=true;
+                            plantsList.add(newFrutal);
+                            msj="New Fruit added, id "+id;
+                        }
+                    }
+                }
+            }
+        else{
+            for (int i=0;i<plants.length&&!isAdded;i++ ) {
+                for (int j=0;j<plants[0].length&&!isAdded; j++ ) {
+                    if((i+j)%2==1){
+                        Ornamental newOrnamental=new Ornamental(namePlant,costPlant, heigth,id);
+                        plants[i][j]=newOrnamental;
+                        isAdded=true;
+                        plantsList.add(newOrnamental);
+                        msj="new Ornamental added, id "+id;
+                    }
+                }
+            }
         }
         return msj;
     }
@@ -111,7 +127,7 @@ public class GardenCenter{
         for (int i=0;i<plantsList.size();i++ ) {
             if(plantsList.get(i) instanceof Ornamental){
                 if(((Ornamental)(plantsList.get(i))).getHeight()>1){
-                    msj=msj+plantsList.get(i).getName();
+                    msj=msj+plantsList.get(i).getName()+"\n";
                 }
             }
         }
