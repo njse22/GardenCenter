@@ -19,7 +19,12 @@ public class Main {
     }
     
     public static void main(String[] args) {
-        Main main = new Main(); 
+        Main main = new Main();
+        /* Test Cases
+         *   main.garden.addPlant("Rosa",5, "Rosita", 0);
+         *   main.garden.addPlant("Amapola",3, null, 5);
+         *   main.garden.addPlant("Girasol",2, null, 0.5);
+        */
         int option = 0; 
         do{
             option = main.optionMenu(); 
@@ -44,21 +49,50 @@ public class Main {
     public void executeOption(int option){
         switch(option){
             case 1:
+                uiAddPlant();
+                break;
 
-            break;
+            case 2:
+                System.out.println(garden.listOrnamentalPlants());
+                break;
 
-            case 2: 
-            break;
-
-            case 3: 
-            break;
+            case 3:
+                uiSellPlant();
+                break;
 
             default:
             System.out.println("Invalip Option.");
             break;
         }
     }
+    public void uiAddPlant(){
+        System.out.println("Name: ");
+        String name = reader.next();
+        System.out.println("Cost: ");
+        double cost = reader.nextDouble();
+        System.out.println("0 - Fruity \n1 - Ornamental");
+        int typePlant = reader.nextInt();
+        switch (typePlant){
+            case 0 -> {
+                System.out.println("Name fruit: ");
+                String nameFruit = reader.next();
+                System.out.println(garden.addPlant(name, cost, nameFruit, 0));
+            }
+            case 1 -> {
+                System.out.println("Height: ");
+                double height = reader.nextDouble();
+                System.out.println(garden.addPlant(name, cost, null, height));
 
+            }
+        }
+    }
+
+    public void uiSellPlant(){
+        System.out.println(garden.showPlants());
+        System.out.println("Name plant: ");
+        String namePlant = reader.next();
+        System.out.println(garden.sellPlant(namePlant));
+    }
 
      public int validateIntegerInput(){
         int option = 0;
