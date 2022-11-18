@@ -18,13 +18,58 @@ public class GardenCenter{
     public GardenCenter(String name, String direcction) {
         this.name = name;
         this.direcction = direcction;
-
+        this.plantsList = new ArrayList<>();
+        this.plants = new Plant [12][6];
     }
+
+
+
+
+    public String addPlantFruitTrees(String name, double cost, String nameOfFruString){
+        String msj = "Se ha añadido exitosamente";
+        if(plantsList.add(new FruitTrees(name, cost, nameOfFruString)) == true){
+            return msj;
+        }else{
+            System.out.println("Error");
+        }
+        return msj;
+        
+    }
+
+    public String addPlantOrnamentals(String name, double cost, double height){
+        String msj = "Se ha añadido exitosamente";
+        if(plantsList.add(new Ornamentals(name, cost,height)) == true){
+            return msj;
+        }else{
+            System.out.println("Error");
+        }
+        return msj;
+    }
+
+    public String listPlantsHeight(){
+        String msj = "Estas son las plantas que miden mas de un metro: ";
+        for(int i =0; i<plantsList.size(); i++){
+            if(Ornamentals.getHeight() >= 1 ){
+                msj += Plant.getName();
+            }
+        }
+        return msj;
+    }
+
+    public String listPlants(){
+        String msj = "";
+        for(int i =0; i <plantsList.size(); i++){
+            msj += Plant.getName();
+        }
+        return msj;
+    }
+
 
     /**
      * @return the name
      */
-    public String getName() {
+    public String getName(){
+
         return name;
     }
 

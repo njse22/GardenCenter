@@ -43,24 +43,21 @@ public class Main {
 
     public void executeOption(int option){
         switch(option){
-            case 1:
+            case 1 -> addPlant();
 
-            break;
+            case 2 -> listOrnamentals();
 
-            case 2: 
-            break;
+            case 3 -> sellProduct();
 
-            case 3: 
-            break;
+            
 
-            default:
-            System.out.println("Invalip Option.");
-            break;
+            default ->  System.out.println("Invalip Option.");
+        
         }
     }
 
 
-     public int validateIntegerInput(){
+    public int validateIntegerInput(){
         int option = 0;
 
         if(reader.hasNextInt()){
@@ -71,6 +68,52 @@ public class Main {
             option = -1;
         }
         return option;
+    }
+
+    public void addPlant(){
+        String msj = "";
+        System.out.println("Que tipo de planta deseas añadir: "+
+        "\n 1. Frutales"+
+        "\n 2. Ornamentales"+
+        "\n Opcion: ");
+        int type = reader.nextInt();
+        reader.nextLine();
+
+        System.out.println("Dime el nombre de esta planta: ");
+        String name = reader.nextLine();
+
+        System.out.println("Dime el costo: ");
+        double cost = reader.nextDouble();
+        reader.nextLine();
+
+        switch(type){
+            case 1: 
+                System.out.println("Dime el nombre de la fruta");
+                String nameOfFruit = reader.nextLine();
+                System.out.println(garden.addPlantFruitTrees(name, cost, nameOfFruit));
+                break;
+            case 2:
+                System.out.println("Dime la altura de esta ornamental en (mts): ");
+                double height = reader.nextDouble();
+                System.out.println(garden.addPlantOrnamentals(name,cost, height));
+                break;    
+        }
+    }
+
+    public void listOrnamentals(){
+        System.out.println(garden.listPlantsHeight());
+    }
+
+    //No acabe este profe :c
+    public void sellProduct(){
+        String msj = "";
+        System.out.println(garden.listPlants());
+
+        System.out.println("Dime el nombre de la planta que deseas comprar: ");
+        String name = reader.nextLine();
+
+
+      
     }
     
 }
