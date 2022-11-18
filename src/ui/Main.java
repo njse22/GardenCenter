@@ -1,6 +1,6 @@
 package ui;
 
-import model.GardenCenter;
+import model.*;
 import java.util.Scanner;
 
 public class Main {
@@ -42,8 +42,60 @@ public class Main {
     }
 
     public void executeOption(int option){
+
+        String plantType = "";
+        String name = "";
+        double cost = 0;
+        String fruitName = "";
+        double height = 0;
+        String msj = "";
+
         switch(option){
             case 1:
+            System.out.println("Ingrese el tipo de planta a agregar. (Frutal o Ornamental): ");
+            plantType = reader.next();
+
+            if(plantType.equalsIgnoreCase("Frutal")){
+                System.out.println("Ingrese el nombre de la planta: ");
+                name = reader.next();
+                reader.nextLine();
+                System.out.println("Ingrese el costo de la planta: ");
+                cost = reader.nextDouble();
+                System.out.println("Ingrese el nombre del fruto de la planta: ");
+                fruitName = reader.next();
+                reader.nextLine();
+
+                Plant fruity = new Fruity(name, cost, fruitName);
+                garden.addPlant(fruity);
+
+                if(garden.addPlant(fruity) == true){
+                    msj = "Planta frutal agregada.";
+                    System.out.println(msj);
+                }else{
+                    msj = "No se agrego la planta.";
+                    System.out.println(msj);
+                }
+
+            }else if(plantType.equalsIgnoreCase("Ornamental")){
+                System.out.println("Ingrese el nombre de la planta: ");
+                name = reader.next();
+                reader.nextLine();
+                System.out.println("Ingrese el costo de la planta: ");
+                cost = reader.nextDouble();
+                System.out.println("Ingrese la altura de la planta: ");
+                height = reader.nextDouble();
+
+                Plant ornamental = new Ornamental(fruitName, cost, height);
+                garden.addPlant(ornamental);
+
+                if(garden.addPlant(ornamental) == true){
+                    msj = "Planta ornamental agregada.";
+                    System.out.println(msj);
+                }else{
+                    msj = "No se pudo agregar a la planta.";
+                    System.out.println(msj);
+                }
+            }
 
             break;
 
