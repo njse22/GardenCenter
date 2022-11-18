@@ -41,16 +41,65 @@ public class Main {
         return option;
     }
 
+    public void plantRegister(){
+        String msj = "This plant name is already use.";
+        System.out.println("Type plant name.");
+        String plantName = reader.next();
+        int plantPos = garden.searchPlant(plantName);
+        if (plantPos == -1){
+            System.out.println("Type plant cost.");
+            double plantCost = getDoubleData();
+            int option = 0;
+            String fruitName = "";
+            double alture = 0;
+
+            while(option == 0){
+                System.out.println("Type plant type: 1)Fruity plant  2)Ornamental plant.");
+                option = getIntegerData();
+
+                switch(option){
+                case 1 : System.out.println("Type plant fruit name.");
+                    fruitName = reader.next();
+                    break;
+
+                case 2 : System.out.println("Type plant alture.");
+                    alture = getDoubleData();
+                    break;
+
+                default: System.out.println("Invalid Option. Type another.");
+                    option = 0;
+                    break;
+                }
+            }
+
+            msj = garden.plantRegister(option, plantName, plantCost, fruitName, alture);
+            
+        }
+
+        System.out.println(msj);
+
+    }
+
+    public void showOrnamentalPlantsList(){
+        String msj = garden.printOrnamentalPlants();
+        System.out.println(msj);
+    }
+
     public void executeOption(int option){
         switch(option){
             case 1:
-
+                plantRegister();
             break;
 
-            case 2: 
+            case 2:
+                 showOrnamentalPlantsList();
             break;
 
             case 3: 
+            break;
+
+            case 0:
+                System.out.println("Byeee!");
             break;
 
             default:
@@ -59,12 +108,50 @@ public class Main {
         }
     }
 
+    public int getIntegerData(){
+        String msj = "Invalid character. Type another.";
+        int data = -1;
+        while(data == -1){
+            data = validateIntegerInput();
+            if (data == -1){
+                System.out.println(msj);
+            }
+        }
+        return data;
+    }
 
-     public int validateIntegerInput(){
+
+    public int validateIntegerInput(){
         int option = 0;
 
         if(reader.hasNextInt()){
             option = reader.nextInt();
+        }
+        else{
+            reader.nextLine();
+            option = -1;
+        }
+        return option;
+    }
+
+    public double getDoubleData(){
+        String msj = "Invalid character. Type another.";
+        double data = -1;
+        while(data == -1){
+            data = validateDoubleInput();
+            if (data == -1){
+                System.out.println(msj);
+            }
+        }
+        return data;
+    }
+
+
+    public double validateDoubleInput(){
+        double option = 0;
+
+        if(reader.hasNextDouble()){
+            option = reader.nextDouble();
         }
         else{
             reader.nextLine();
