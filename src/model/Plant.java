@@ -4,6 +4,7 @@ public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String code;
 
     /**
      * @param name
@@ -12,7 +13,9 @@ public abstract class Plant {
     public Plant(String name, double cost) {
         this.name = name;
         this.cost = cost;
+        this.code = "NOT_FOUND";
     }
+
     /**
      * @return the name
      */
@@ -37,6 +40,7 @@ public abstract class Plant {
     public void setCost(double cost) {
         this.cost = cost;
     }
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
@@ -44,6 +48,14 @@ public abstract class Plant {
     @Override
     public String toString() {
         return "Plant [" + (name != null ? "name=" + name + ", " : "") + "cost=" + cost + "]";
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     } 
 
     
