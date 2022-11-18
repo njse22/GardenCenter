@@ -4,14 +4,16 @@ public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String id;
 
     /**
      * @param name
      * @param cost
      */
-    public Plant(String name, double cost) {
+    public Plant(String name, double cost, String id) {
         this.name = name;
         this.cost = cost;
+        this.id = id;
     }
     /**
      * @return the name
@@ -43,7 +45,7 @@ public abstract class Plant {
     
     @Override
     public String toString() {
-        return "Plant [" + (name != null ? "name=" + name + ", " : "") + "cost=" + cost + "]";
+        return "Plant [" + (name != null ? "name=" + name + ", " : "") + "cost : $" + cost + "]";
     } 
 
     
