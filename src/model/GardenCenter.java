@@ -77,6 +77,7 @@ public class GardenCenter{
     public String addPlant (String name,double cost,String nameFrut,int type,double height){
         String msj="No se pudo crear la planta";
         boolean create=false;
+        System.out.println(name);
         if(validateNamePlant(name)==false){
             if(type==1){
                 Frutal frutal=new Frutal(name, cost, nameFrut);
@@ -103,14 +104,17 @@ public class GardenCenter{
         return msj;
     }
     public String printOrnamentales(){
-        String msj="Crea primero la planta";
+        String msj="";
         Ornamental ornamental=null;
         for(int i=0;i<plantsList.size();i++){
             name=plantsList.get(i).getName();
             ornamental=searchPlant(name);
             if(ornamental.getHeight()>1){
-                msj+="nombre de la planta es "+ name +" su altura es "+ ornamental.getHeight()+"\n";
+                msj+=" Nombre de la planta es "+ name +" su altura es "+ ornamental.getHeight()+"\n";
             }
+        }
+        if(msj.equals(null)){
+            msj="Crea primero la planta";
         }
 
         return msj;
@@ -128,9 +132,11 @@ public class GardenCenter{
         boolean exist=false;
         boolean flag=false;
         for (int i=0;i<plantsList.size() & ! flag;i++){
+            
             if(plantsList.get(i).getName().equals(name)){
-                flag=false;
-                exist=false;
+            
+                flag=true;
+                exist=true;
             }
         }
         return exist;
