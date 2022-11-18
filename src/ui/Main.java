@@ -42,12 +42,46 @@ public class Main {
     }
 
     public void executeOption(int option){
+        String name="";
+        String nameFruit="";
+        String msj="";
+        int select=0;
+        double height=0;
+        double cost=0;
+        boolean exist=false;
         switch(option){
             case 1:
+            System.out.println("Cual es el tipo de planta 1)Frutal o 2)Ornamental");
+            select=reader.nextInt();
+            if(select==1){
+                System.out.println("Cual es el nombre");
+                name=reader.next();
 
+                System.out.println("Cual es el costo");
+                cost=reader.nextDouble();
+                System.out.println("Cual es el nombre del fruto");
+                nameFruit=reader.next();
+                msj=garden.addPlant(name,cost,nameFruit,select,height);
+            }if(select ==2){
+                System.out.println("Cual es el nombre");
+                name=reader.next();
+                System.out.println("Cual es el costo");
+                cost=reader.nextDouble();
+                System.out.println("Cual es la altura");
+                height=reader.nextDouble();
+                msj=garden.addPlant(name,cost,nameFruit,select,height);
+
+            }if(select <1 | select>2){
+                msj="No existe ese tipo de planta";
+            }
+            
+            System.out.println(msj);
             break;
 
             case 2: 
+             msj=garden.printOrnamentales();
+             System.out.println(msj);
+
             break;
 
             case 3: 
