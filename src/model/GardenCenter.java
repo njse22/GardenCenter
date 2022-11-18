@@ -120,6 +120,82 @@ public class GardenCenter{
         }
         return msj;
     }
+    public String sellPlant(String name){
+        String msj = "";
+        Plant anyPlant = searchPlant(name);
+        if(anyPlant!=null){
+            deletePlant(anyPlant);
+            msj = "ID de compra "+generateVoucher()+"\n"+
+            "Planta comprada";
+        }else{
+            msj = "No se encontro la planta";
+        }
+        return msj;
+    }
+    public void deletePlant(Plant plant){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if(plants[i][j]!=null){
+                    if(plants[i][j].equals(plant)){
+                        plants[i][j] = null;
+                    }
+                }
+            }
+        }
+        plantsList.remove(plant);
+    }
+    public String generateVoucher(){
+        int[][] matrix2 = new int[4][4];
+        this.matrix = initMatrix(this.matrix);
+        matrix2 = initMatrix(matrix2);
+        matrix2 = multiplyMatrix(matrix2, this.matrix);
+        String code = "";
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < matrix2.length; j++) {
+                if(i == 0 && j == 0){
+                    code += matrix2[i][j];
+                }
+                if(i == 0 && j == matrix2.length-1){
+                    code += matrix2[i][j];
+                }
+            }
+        }
+        for (int i = 1; i < matrix2.length-1; i++) {
+            for (int j = 0; j < matrix2.length; j++) {
+                if(j != 0 && j<matrix2.length-1){
+                    code += matrix2[i][j];
+                }
+            }
+        }
+        for (int i = matrix2[0].length-1; i < matrix2.length; i++) {
+            for (int j = 0; j < matrix2.length; j++) {
+                if(i == matrix2[0].length-1 && j == 0){
+                    code += matrix2[i][j];
+                }
+                if(i == matrix2[0].length-1 && j == matrix2.length-1){
+                    code += matrix2[i][j];
+                }
+            }
+        }
+        return code.substring(4);
+    }
+
+    public int[][] multiplyMatrix(int[][] matrix1, int[][] matrix2){
+        int[][] matrix3 = new int[4][4];
+        for (int i = 0; i < matrix3.length; i++) {
+            for (int j = 0; j < matrix3[0].length; j++) {
+                matrix3[i][j]=matrix1[i][j]*matrix2[i][j];
+            }
+        }
+        return matrix3;
+    }
+    public String listPlants(){
+        String msj = "lista de plantas: \n";
+        for (int i = 0; i < plantsList.size(); i++) {
+            msj += "- "+plantsList.get(i).toString()+"\n";
+        }
+        return msj;
+    }
     public Plant createPlant(String name, double costs, double maxHeight, String fruteName, int option){
         Plant anyPlant = null;
         if(option==1){
@@ -173,7 +249,8 @@ public class GardenCenter{
     } 
 
     public String generateID(){
-        initMatrix();
+        this.matrix = initMatrix(this.matrix);
+        
         String id = "";
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
@@ -191,12 +268,13 @@ public class GardenCenter{
         }
         return id;  
     }
-    public void initMatrix(){
+    public int[][] initMatrix(int[][] matrix){
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                this.matrix[i][j]=(int)(Math.random()*9);
+                matrix[i][j]=(int)(Math.random()*10);
             }
         }
+        return matrix;
     }
     
 

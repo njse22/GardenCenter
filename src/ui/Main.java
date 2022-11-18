@@ -51,10 +51,13 @@ public class Main {
             case 2: 
                 list1MeterPlants();
             break;
-
+                
             case 3: 
+                sellProduct();
             break;
-
+            case 0:
+                System.out.println("Exit program");
+            break;
             default:
             System.out.println("Invalip Option.");
             break;
@@ -74,6 +77,7 @@ public class Main {
         }
         return option;
     }
+    
     public void addPlant(){
         String name = null;
         String frute = null;
@@ -107,6 +111,14 @@ public class Main {
 
     public void list1MeterPlants(){
         System.out.println(garden.list1MeterPlants());
+    }
+
+    public void sellProduct(){
+        String name = null;
+        System.out.println(garden.listPlants());
+        System.out.println("Inserte el nombre de la planta que desea comprar");
+        name = reader.nextLine();
+        System.out.println(garden.sellPlant(name));
     }
     
 }
