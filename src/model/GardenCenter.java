@@ -8,7 +8,8 @@ public class GardenCenter{
     private String direcction;
 
     private Plant[][] plants;
-    private ArrayList<Plant> plantsList; 
+    private ArrayList<Plant> plantsList;
+    private ArrayList<String> namePlants;
 
 
     /**
@@ -16,10 +17,91 @@ public class GardenCenter{
      * @param direcction
      */
     public GardenCenter(String name, String direcction) {
-        this.name = name;
-        this.direcction = direcction;
-
+      this.name = name;
+      this.direcction = direcction;
+      this.plants = new Plant[12][6];
     }
+    
+    public String addFrutalPlant(String name, double cost, String nameFruto) {
+      String msj = "";
+      boolean wasAdded = false;
+      int posPlant = searchPlantByName(name);
+      if (posPlant == -1) {
+        Frutal plantFrutal = new Frutal(name, cost, nameFruto);
+        if (plants[i][j] == null) {
+          plants[i][j] = plantFrutal;
+          addPlantToList(plantFrutal);
+          addNameOfPlant(name);
+          wasAdded = true;
+          msj = "La planta frutal fue añadida al vivero";
+        } else {
+          msj = "Ya no hay espacio para más plantas en el vivero.";
+        }
+      } else {
+        msj = "La planta ya existe dentro del vivero.";
+      }
+      return msj;
+    }
+
+    public String addOrnamentalPlant(String name, double cost, double altura) {
+      String msj = "";
+      boolean wasAdded = false;
+      int posPlant = searchPlantByName(name);
+      if (posPlant == -1) {
+        Ornamental plantOrnamental = new Ornamental(name, cost, altura);
+        if (plants[i][j] == null) {
+          plants[i][j] = plantOrnamental;
+          addPlantToList(plantOrnamental);
+          addNameOfPlant(name);
+          wasAdded = true;
+          msj = "La planta ornamental fue añadida al vivero";
+        } else {
+          msj = "Ya no hay espacio para más plantas en el vivero.";
+        }
+      } else {
+        msj = "La planta ya existe dentro del vivero.";
+      }
+      return msj;
+    }
+
+    public String runMatrix(String name) {
+      String msj = "";
+      int posPlant = searchPlantByName(name);
+      if (posPlant != -1) {
+        for(int i = 0; i < 2; i++){
+          if(i%2==0){
+            
+          }
+        }
+        plantsList.get(posPlant).setIdCode(plantsList.get(posPlant).getMatrixId()[0][]);
+      }
+    }
+
+    public void addNameOfPlant(String namePlant) {
+      boolean wasFound = false;
+      for (int i = 0; i < namePlants.size() && !wasFound; i++) {
+        if (namePlants.get(i) != null && namePlants.get(i).equalsIgnoreCase(namePlant)) {
+          wasFound = true;
+        }
+      }
+      if (!wasFound) {
+        wasFound = true;
+        namePlants.add(namePlant);
+      }
+    }
+  
+    public void addPlantToList(Plant plant) {
+    boolean wasFound = false;
+    for (int i = 0; i < plantsList.size() && !wasFound; i++) {
+      if (plantsList.get(i) != null && plantsList.get(i).getName().equalsIgnoreCase(plant.getName())) {
+        wasFound = true;
+      }
+    }
+    if (!wasFound) {
+      wasFound = true;
+      plantsList.add(plant);
+    }
+  }
 
     /**
      * @return the name
@@ -63,6 +145,16 @@ public class GardenCenter{
         this.plants = plants;
     } 
 
-    
+    public int searchPlantByName(String plantName) {
+      int pos = -1;
+      boolean wasFound = false;
+      for (int i = 0; i < plantsList.size() && !wasFound; i++) {
+        if (plantsList.get(i) != null && plantsList.get(i).getName().equalsIgnoreCase(plantName)) {
+          pos = i;
+          wasFound = true;
+        }
+      }
+      return pos;
+    }
 
 }

@@ -1,17 +1,46 @@
 package model;
 
+import java.util.Random;
+
 public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String idCode;
+    private Random random;
+    private int[][] matrixId;
 
     /**
      * @param name
      * @param cost
      */
     public Plant(String name, double cost) {
-        this.name = name;
-        this.cost = cost;
+      this.name = name;
+      this.cost = cost;
+      this.idCode = "";
+      this.matrixId = new int[4][4];
+      fillMatrixId(matrixId);
+    }
+    
+    public void fillMatrixId(int[][] matrixId) {
+      random = new Random();
+      for (int i = 0; i < matrixId.length; i++) {
+        for (int j = 0; j < matrixId.length; j++) {
+          matrixId[i][j] = random.nextInt(10);
+        }
+      }
+    }
+
+    public int[][] getMatrixId() {
+      return matrixId;
+    }
+
+    public void setIdCode(int num) {
+      idCode += Integer.toString(num);
+    }
+
+    public String getIdCode() {
+      return idCode;
     }
     /**
      * @return the name
