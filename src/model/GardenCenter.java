@@ -4,21 +4,23 @@ import java.util.ArrayList;
 
 public class GardenCenter{
 
-    private String name; 
-    private String direcction;
-
+    private String name;
+    private String direction;
     private Plant[][] plants;
-    private ArrayList<Plant> plantsList; 
+    private ArrayList<Plant> plantsList;
+    private int[][] ids; 
 
 
     /**
      * @param name
      * @param direcction
      */
-    public GardenCenter(String name, String direcction) {
+    public GardenCenter(String name, String direction) {
         this.name = name;
-        this.direcction = direcction;
-
+        this.direction = direction;
+        plantsList=new ArrayList <Plant>(10);
+        plants=new Plant[4][4];
+        ids=new int[5][5];
     }
 
     /**
@@ -38,15 +40,15 @@ public class GardenCenter{
     /**
      * @return the direcction
      */
-    public String getDirecction() {
-        return direcction;
+    public String getDirection() {
+        return direction;
     }
 
     /**
      * @param direcction the direcction to set
      */
-    public void setDirecction(String direcction) {
-        this.direcction = direcction;
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     /**
@@ -62,7 +64,67 @@ public class GardenCenter{
     public void setPlants(Plant[][] plants) {
         this.plants = plants;
     } 
-
-    
+    public int[][] fillMatriz1(){
+        int upperBound=9;
+        int lowerBound=1;
+        int range=(upperBound-lowerBound)+1;
+        for (int i=0;i<5;i++ ) {
+            for (int j =0;j<5;j++ ) {
+                if (ids[i][j]==0) {
+                    ids[i][j]= (int)(Math.random() * range) + lowerBound;
+                }
+            }
+        }   
+        return ids; 
+    }
+    public String showIdPlant(){
+        String msj="";
+        int[][] matrizFill=fillMatriz1();
+        msj="";
+             for(int i = 0; i<4; i++){
+                 for (int j=0;j<4 ;j++ ) {
+                     if((i+j)%2==0){
+                        msj=msj+matrizFill[i][j];
+                     }                   
+                }
+            }
+        return msj;
+        }
+    public String addPlant(int typePlant, String namePlant, double costPlant, String nameFruit, double heigth){
+        String msj="";
+        if(typePlant==1){
+            String id=showIdPlant();
+            Frutal newFrutal= new Frutal(namePlant,costPlant,nameFruit,id);
+            plantsList.add(newFrutal);
+            msj="New Fruit added, id "+id;
+        }
+      else{
+            String id=showIdPlant();
+            Ornamental newOrnamental=new Ornamental(namePlant,costPlant, heigth,id);
+            plantsList.add(newOrnamental);
+            msj="new Ornamental added, id "+id;
+        }
+        return msj;
+    }
+    public String listOrnamentalPlants(){
+        String msj="No hay plantas ornamentales mayores a un mt";
+        for (int i=0;i<plantsList.size();i++ ) {
+            if(plantsList.get(i) instanceof Ornamental){
+                if(((Ornamental)(plantsList.get(i))).getHeight()>1){
+                    msj=msj+plantsList.get(i).getName();
+                }
+            }
+        }
+        return msj;
+    }
+    public String listPlants(){
+        String msj="";
+        for (int i=0;i<plantsList.size() ;i++ ) {
+            if(plantsList.get(i)!=null){
+                msj= msj+plantsList.get(i).toString();
+            }
+        }
+        return msj;
+    }
 
 }

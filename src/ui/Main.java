@@ -42,19 +42,44 @@ public class Main {
     }
 
     public void executeOption(int option){
+         int typeOfPlant=0;
+            String namePlant="";
+            String possiblePlantsToadd=
+                            "1. Fruit\n"+
+                            "2. Ornamental";
+            double costPlant=0;
+            String nameFruit="";
+            double heigth=0;
+            String msj="";
         switch(option){
             case 1:
+            System.out.println("Enter the type of plant");
+            System.out.println(possiblePlantsToadd);
 
+            typeOfPlant=reader.nextInt();
+            
+            System.out.println("Enter the name of the plant");
+            namePlant=reader.next();
+            System.out.println("Enter the cost of the plant");
+            costPlant=reader.nextDouble();
+            System.out.println("In case that the plant is a fruit, enter the name of the fruit");
+            nameFruit=reader.next();
+            System.out.println("In case that the plant is ornamental, enter the heigth (in mts)");
+            heigth=reader.nextDouble();
+            msj=garden.addPlant(typeOfPlant,namePlant,costPlant,nameFruit, heigth);
+            System.out.println(msj);
             break;
 
-            case 2: 
+            case 2:
+            msj=garden.listOrnamentalPlants();
+            System.out.println(msj);
             break;
 
             case 3: 
             break;
 
             default:
-            System.out.println("Invalip Option.");
+            System.out.println("Invalid Option.");
             break;
         }
     }
