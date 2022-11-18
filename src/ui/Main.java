@@ -106,7 +106,7 @@ public class Main {
     }
 
     public void list1MeterPlants(){
-
+        System.out.println(garden.list1MeterPlants());
     }
     
 }

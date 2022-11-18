@@ -63,29 +63,25 @@ public class GardenCenter{
         String msj = "";
         boolean isAdded = false;
         if(option == 1){
-            for (int i = 0; i < plants.length; i++) {
-                for (int j = 0; j < plants[0].length; j++) {
-                    if(i%2==0){
+            for (int i = 0; i < plants.length && !isAdded; i+=2) {
+                for (int j = 0; j < plants[0].length && !isAdded; j++) {
                         if(plants[i][j]==null){
                             plants[i][j] = anyPlant;
                             isAdded = true;
                             msj = "Se agrego la planta";
                             plantsList.add(anyPlant);
                         }
-                    }
                 }
             }
         }else{
-            for (int i = 0; i < plants.length; i++) {
-                for (int j = 0; j < plants[0].length; j++) {
-                    if(i%2!=0){
+            for (int i = 1; i < plants.length && !isAdded; i+=2) {
+                for (int j = 0; j < plants[0].length && !isAdded; j++) {      
                         if(plants[i][j]==null){
                             plants[i][j] = anyPlant;
                             isAdded = true;
                             msj = "Se agrego la planta";
                             plantsList.add(anyPlant);
                         }
-                    }
                 }
             }      
         }
@@ -112,12 +108,17 @@ public class GardenCenter{
     }
 
     public String list1MeterPlants(){
-        String msj =  "Plantas mas altas que 1m";
-        for (int i = 0; i < matrix.length; i+=2) {
+        String msj =  "Plantas mas altas que 1m \n";
+        for (int i = 1; i < matrix.length; i+=2) {
             for (int j = 0; j < matrix.length; j++) {
-                if(plants[i][j])
+                if(plants[i][j]!=null){
+                    if(((Ornamental)(plants[i][j])).getMaxHeight()>1){
+                        msj += plants[i][j].toString()+"\n";
+                    }
+                }
             }
         }
+        return msj;
     }
     public Plant createPlant(String name, double costs, double maxHeight, String fruteName, int option){
         Plant anyPlant = null;
