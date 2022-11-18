@@ -42,21 +42,60 @@ public class Main {
     }
 
     public void executeOption(int option){
+        String msg = "";
+        String name = "";
+        double cost = 0.0;
+        double height = 0.0;
+        String fruitName = "";
+
         switch(option){
             case 1:
+                System.out.print("Qué tipo de planta es?\n1.Frutal\n2.Ornamental\nInput: ");
+                int input = validateIntegerInput();
 
+                System.out.print("Cual es el nombre de la planta? ");
+                name = reader.next();
+                System.out.print("Cual es el costo de la planta? ");
+                cost = validateDobleInput();
+
+                msg = "Invalid Input";
+                if(cost > 0){
+                    if(input == 1){
+                        System.out.print("Cual es el nombre de su fruto? ");
+                        fruitName = reader.next();
+                        msg = garden.addFruityPlant(name,cost,fruitName);
+                    }else if(input == 2){
+                        System.out.print("Cual es la altura de la planta? ");
+                        height = validateDobleInput();
+                        msg = garden.addOrnamentalPlant(name,cost,height);
+                    }else{
+                        msg = "Not recognized plant type.";
+                    }
+                }
             break;
 
             case 2: 
+                msg = garden.listOrnamentalsByHeight(1);
             break;
 
             case 3: 
+                String plants = garden.listAllPlants();
+                msg = "Parece que no hay plantas por el momento";
+                if(!plants.isEmpty()){
+                    System.out.println("\n"+plants);
+                    System.out.print("Cual es el nombre de la planta que desea comprar? ");
+                    name = reader.next();
+
+                    msg = garden.sellPlant(name);
+                }
+                
             break;
 
             default:
-            System.out.println("Invalip Option.");
+            msg = "Invalip Option.";
             break;
         }
+        System.out.println(msg);
     }
 
 
@@ -65,6 +104,19 @@ public class Main {
 
         if(reader.hasNextInt()){
             option = reader.nextInt();
+        }
+        else{
+            reader.nextLine();
+            option = -1;
+        }
+        return option;
+    }
+    
+    public double validateDobleInput(){
+        double option = 0;
+
+        if(reader.hasNextDouble()){
+            option = reader.nextDouble();
         }
         else{
             reader.nextLine();

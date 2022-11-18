@@ -4,6 +4,7 @@ public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String id;
 
     /**
      * @param name
@@ -12,7 +13,31 @@ public abstract class Plant {
     public Plant(String name, double cost) {
         this.name = name;
         this.cost = cost;
+        this.id = generateCode();
+        System.out.println(id);
     }
+
+    public String getId(){
+        return this.id;
+    }
+
+    public String generateCode(){
+        int[][] matrix = MatrixUtil.randomMatrix(4,4);
+        String code = "";
+
+        for(int i=0; i <matrix.length;i++){
+            for(int j = 0; j < matrix[0].length;j++){
+                if(i %2 == 0 && j %2 ==0){
+                    code += matrix[i][j];
+                }else if(i%2 != 0 && j%2!= 0){
+                    code += matrix[i][j];
+                }
+            }
+        }
+        return code;
+    }
+
+
     /**
      * @return the name
      */
