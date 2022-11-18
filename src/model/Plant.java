@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 
 public abstract class Plant {
     
@@ -13,6 +14,7 @@ public abstract class Plant {
         this.name = name;
         this.cost = cost;
     }
+
     /**
      * @return the name
      */
@@ -44,9 +46,10 @@ public abstract class Plant {
     @Override
     public String toString() {
         return "Plant [" + (name != null ? "name=" + name + ", " : "") + "cost=" + cost + "]";
-    } 
+    }
 
-    
-    
-
+    public boolean getMts() {
+        boolean foundedMts = true;
+        return foundedMts;
+    }
 }
