@@ -1,12 +1,13 @@
 package model;
 
+import java.lang.Math;
 import java.util.ArrayList;
 
 public class GardenCenter{
 
     private String name; 
     private String direcction;
-
+    private int[][] matrix;
     private Plant[][] plants;
     private ArrayList<Plant> plantsList; 
 
@@ -63,6 +64,32 @@ public class GardenCenter{
         this.plants = plants;
     } 
 
+    public String generateID(){
+        initMatrix();
+        String id = "";
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if(i%2==0){
+                    if(j%2==0){
+                        id+= matrix[i][j];
+                    }
+                }
+                if(i%2!=0){
+                    if(j%2!=0){
+                        id+= matrix[i][j];
+                    }
+                }
+            }
+        }
+        return id;
+    }
+    public void initMatrix(){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                this.matrix[i][j]=(int)(Math.random()*9);
+            }
+        }
+    }
     
 
 }
