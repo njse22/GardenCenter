@@ -63,6 +63,59 @@ public class GardenCenter{
         this.plants = plants;
     } 
 
-    
+    public Plant searchPlant(String name){
+        Plant plant = null;
+        boolean isFound = false;
+
+        for(int i = 0; i < plantsList.size() && !isFound; i++){
+            if(plantsList.get(i).getName().equalsIgnoreCase(name)){
+                plant = plantsList.get(i);
+                isFound = true;
+            }
+        }
+    }
+
+    public String addPlantFruit(String name, double cost, String fruit){
+        
+        String msj = "";
+        Plant plant = searchPlant(name);
+        /**Plant[][] plants;
+
+        plants = new Plant[garden.lenght][garden[0].lenght];
+        int count = 0;
+        */
+
+        if(plant != null){
+            msj = "Este nombre de planta ya existe :c ";
+        }else{
+            
+            /**
+            for(int i = 0; i < garden.lenght; i++){
+            }
+            */
+            
+            Plant newPlant = new Frutal(name, cost, fruit);
+            plants.add(newPlant);
+            msj = "Nueva fruta añadida :p";
+        }
+        return msj;
+    }
+
+    public String addPlantOrnamental(String name, double cost, double height){
+        
+        String msj = "";
+        Plant plant = searchPlant(name);
+ 
+        if(plant != null){
+            msj = "Este nombre de planta ya existe :c ";
+        }else{
+
+            Plant newPlant = new Ornamental(name, cost, height);
+            plants.add(newPlant);
+            msj = "Nueva fruta añadida :p";
+        }
+        return msj;
+    }
+
 
 }

@@ -44,6 +44,7 @@ public class Main {
     public void executeOption(int option){
         switch(option){
             case 1:
+                addPlant();
 
             break;
 
@@ -59,6 +60,20 @@ public class Main {
         }
     }
 
+    public double validateDouble(){
+        double option = -1;
+
+        if(reader.hasNextDouble()){
+            option = reader.nextDouble();
+        }
+        else{
+            reader.next();
+            option = -1;
+        }
+        return option;
+    }
+
+
 
      public int validateIntegerInput(){
         int option = 0;
@@ -71,6 +86,36 @@ public class Main {
             option = -1;
         }
         return option;
+    }
+
+    public void addPlant(){
+        String msj = "";
+        
+        System.out.println("Escribe el nombre de la planta");
+        String name = reader.next();
+        System.out.println("Escribe el costo de la planta");
+        double cost = validateDouble();
+
+        System.out.println("Escribe que tipo de planta deseas agregar: \n"+
+        "1) Fruta \n"+
+        "2) Ornamental ");
+        int opt = validateIntegerInput();
+        
+
+        if(opt == -1 || opt < 1 || opt > 2){
+            System.out.println("Escribe un valor válido. ");
+        }
+        else if(opt == 1){
+            System.out.println("Para finalizar, que tipo de fruta da esta planta: ");
+            String fruit = reader.next();
+            msj = garden.addPlantFruit(name, cost, fruit);
+        }
+        else if(opt == 2){
+            System.out.println("Para finalizar, que altura tiene la planta: ");
+            double height = validateDouble();
+            msj = garden.addPlantOrnamental(name, cost, height);
+        }
+
     }
     
 }
