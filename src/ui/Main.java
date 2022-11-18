@@ -38,16 +38,18 @@ public class Main {
                 "3. vender producto \n"+
 				"0. Exit. "); 
         option = validateIntegerInput();
+        reader.nextLine();
         return option;
     }
 
     public void executeOption(int option){
         switch(option){
             case 1:
-
+                addPlant();
             break;
-
+                
             case 2: 
+                list1MeterPlants();
             break;
 
             case 3: 
@@ -71,6 +73,40 @@ public class Main {
             option = -1;
         }
         return option;
+    }
+    public void addPlant(){
+        String name = null;
+        String frute = null;
+        double cost = 0.0;
+        double maxHeight = 0.0;
+        String option = null;
+        System.out.println("Inserte el nombre de la planta");
+        name = reader.nextLine();
+        System.out.println("Inserte el costo de la planta");
+        cost = reader.nextDouble();
+        reader.nextLine();
+        System.out.println("De que tipo es la planta? \n"+
+        "1. Frutal \n"+
+        "2. Ornamental \n");
+        option = reader.nextLine();
+        if(option.equals("1") || option.equals("2")){
+            if(option.equals("1")){
+                System.out.println("Inserte el nombre del fruto");
+                frute = reader.nextLine();
+            }
+            if(option.equals("2")){
+                System.out.println("Inserte la altura maxima (en metros)");
+                maxHeight = reader.nextDouble();
+            }
+            System.out.println(garden.addPlant(garden.createPlant(name, cost, maxHeight, frute, Integer.parseInt(option))));
+
+        }else{
+            System.out.println("Opcion invalida");
+        }
+    }
+
+    public void list1MeterPlants(){
+
     }
     
 }

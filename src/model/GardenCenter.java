@@ -19,7 +19,114 @@ public class GardenCenter{
     public GardenCenter(String name, String direcction) {
         this.name = name;
         this.direcction = direcction;
+        this.plantsList = new ArrayList<Plant>(72);
+        this.matrix = new int[4][4];
+        plants = new Plant[12][6];
 
+    }
+
+    public String addPlant(Plant anyPlant){
+        String msj = "";
+        Boolean isUnic = true; 
+        Plant holdPlant = searchPlant(anyPlant.getName());
+        if(holdPlant==null){
+            anyPlant.setId(generateID());
+            do{
+                isUnic = isUnic(anyPlant.getId());
+            }while(!isUnic);
+            if(anyPlant instanceof Frutal){
+                msj = addPlant(anyPlant, 1);
+            }else{
+                msj = addPlant(anyPlant, 2);
+            }
+        }else{
+            msj = "Ya hay una planta registrada con ese nombre";
+        }
+
+        return msj;
+    }
+    
+    public boolean isUnic(String id){
+        boolean isFound = false;
+        for (int i = 0; i < matrix.length && !isFound; i++) {
+            for (int j = 0; j < matrix[0].length && !isFound; j++) {
+                if(plants[i][j]!=null){
+                    if(plants[i][j].getId().equals(id)){
+                        isFound = true;
+                    }
+                }
+            }
+        }
+        return !isFound;
+    }
+    public String addPlant(Plant anyPlant, int option){
+        String msj = "";
+        boolean isAdded = false;
+        if(option == 1){
+            for (int i = 0; i < plants.length; i++) {
+                for (int j = 0; j < plants[0].length; j++) {
+                    if(i%2==0){
+                        if(plants[i][j]==null){
+                            plants[i][j] = anyPlant;
+                            isAdded = true;
+                            msj = "Se agrego la planta";
+                            plantsList.add(anyPlant);
+                        }
+                    }
+                }
+            }
+        }else{
+            for (int i = 0; i < plants.length; i++) {
+                for (int j = 0; j < plants[0].length; j++) {
+                    if(i%2!=0){
+                        if(plants[i][j]==null){
+                            plants[i][j] = anyPlant;
+                            isAdded = true;
+                            msj = "Se agrego la planta";
+                            plantsList.add(anyPlant);
+                        }
+                    }
+                }
+            }      
+        }
+        if(!isAdded){
+            msj = "No hay espacio para plantas de este tipo";
+        }
+        return msj;
+    }
+
+    public Plant searchPlant(String name){
+        boolean isFound = false;
+        Plant anyPlant = null;
+        for (int i = 0; i < matrix.length && !isFound; i++) {
+            for (int j = 0; j < matrix[0].length && !isFound; j++) {
+                if(plants[i][j]!=null){
+                    if(plants[i][j].getName().equals(name)){
+                        isFound = true;
+                        anyPlant = plants[i][j];
+                    }
+                }
+            }
+        }
+        return anyPlant;
+    }
+
+    public String list1MeterPlants(){
+        String msj =  "Plantas mas altas que 1m";
+        for (int i = 0; i < matrix.length; i+=2) {
+            for (int j = 0; j < matrix.length; j++) {
+                if(plants[i][j])
+            }
+        }
+    }
+    public Plant createPlant(String name, double costs, double maxHeight, String fruteName, int option){
+        Plant anyPlant = null;
+        if(option==1){
+            anyPlant = new Frutal(name, costs, fruteName);
+        }else{
+            anyPlant = new Ornamental(name, costs, maxHeight);
+        }
+        return anyPlant;
     }
 
     /**
@@ -81,7 +188,7 @@ public class GardenCenter{
                 }
             }
         }
-        return id;
+        return id;  
     }
     public void initMatrix(){
         for (int i = 0; i < matrix.length; i++) {

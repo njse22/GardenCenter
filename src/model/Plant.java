@@ -4,7 +4,14 @@ public abstract class Plant {
     
     private String name; 
     private double cost;
+    private String id;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return id;
+    }
     /**
      * @param name
      * @param cost
