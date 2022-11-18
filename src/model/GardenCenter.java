@@ -107,7 +107,7 @@ public class GardenCenter{
         return msj;
     }
     public String listOrnamentalPlants(){
-        String msj="No hay plantas ornamentales mayores a un mt";
+        String msj="";
         for (int i=0;i<plantsList.size();i++ ) {
             if(plantsList.get(i) instanceof Ornamental){
                 if(((Ornamental)(plantsList.get(i))).getHeight()>1){
